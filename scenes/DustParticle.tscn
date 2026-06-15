@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjqk61tr3a0mu"]
+
+[ext_resource type="Texture2D" uid="uid://bhryaisbhmvk8" path="res://assets/dustParticle.png" id="1_qdquy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7puhw"]
+size = Vector2(88, 84)
+
+[node name="DustParticle" type="Area2D" groups=["dust"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_7puhw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -3.5)
+scale = Vector2(5.5, 5.5)
+texture = ExtResource("1_qdquy")

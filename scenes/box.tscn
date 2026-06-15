@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dajq5cmhkp708"]
+
+[ext_resource type="Script" uid="uid://bcspi43i3lmur" path="res://scripts/box.gd" id="1_3wyxk"]
+[ext_resource type="Texture2D" uid="uid://ci04j3jbnhxra" path="res://assets/mg2/box.png" id="1_avbth"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43lvf"]
+size = Vector2(11700000, 12100000)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_3wyxk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["draggable-box"]]
+position = Vector2(-6.5, -18.5)
+scale = Vector2(1e-05, 1e-05)
+shape = SubResource("RectangleShape2D_43lvf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_avbth")

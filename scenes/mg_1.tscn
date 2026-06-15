@@ -1,0 +1,137 @@
+[gd_scene load_steps=21 format=3 uid="uid://bf4k7bob6ip0h"]
+
+[ext_resource type="Script" uid="uid://clm7co3klvo5d" path="res://scripts/mg_1.gd" id="1_h5fmv"]
+[ext_resource type="Texture2D" uid="uid://cp8ew5nxja8h8" path="res://assets/bg.png" id="1_kvr73"]
+[ext_resource type="Texture2D" uid="uid://dfps26ukwtki0" path="res://assets/mg1/table.png" id="2_ub1um"]
+[ext_resource type="PackedScene" uid="uid://dajq5cmhkp708" path="res://scenes/box.tscn" id="3_f4upy"]
+[ext_resource type="Script" uid="uid://dgegwbjck3baw" path="res://scripts/broom.gd" id="3_hu5cc"]
+[ext_resource type="Script" uid="uid://c3y74tn6aaa8n" path="res://scripts/box_mg_1.gd" id="4_gwiom"]
+[ext_resource type="Texture2D" uid="uid://6i4bl3ictkn4" path="res://assets/mg1/polishedTest/broom.png" id="7_w6xt4"]
+[ext_resource type="PackedScene" uid="uid://d26nnc5ocok0k" path="res://scenes/draggable_obj.tscn" id="8_ou7cm"]
+[ext_resource type="AudioStream" uid="uid://bplrt82m5cwrf" path="res://sounds/brush.wav" id="9_p5ng8"]
+[ext_resource type="Texture2D" uid="uid://c8awbxio8qswb" path="res://assets/mg1/polishedTest/fax.png" id="9_wekqd"]
+[ext_resource type="Texture2D" uid="uid://b41nbl8l3482g" path="res://assets/mg1/polishedTest/body.png" id="10_w6xt4"]
+[ext_resource type="Texture2D" uid="uid://ftcjdmwrd8ui" path="res://assets/mg1/polishedTest/bin.png" id="11_w6xt4"]
+[ext_resource type="AudioStream" uid="uid://cpod6vah63nwh" path="res://sounds/throw.mp3" id="12_wekqd"]
+[ext_resource type="AudioStream" uid="uid://dajdf25iu5c5l" path="res://sounds/negative_machine-trimmed.wav" id="13_fxo3e"]
+[ext_resource type="AudioStream" uid="uid://dtw3njooqqjr3" path="res://sounds/save.mp3" id="14_6cyv8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ou7cm"]
+size = Vector2(446.6667, 1033.3335)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hu5cc"]
+radius = 260.08545
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5fmv"]
+size = Vector2(572.0002, 441.21432)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6xt4"]
+size = Vector2(502.7027, 613.5137)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hu5cc"]
+size = Vector2(5160, 776.6665)
+
+[node name="mg1" type="Node2D"]
+script = ExtResource("1_h5fmv")
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(361, 628.001)
+scale = Vector2(0.782, 0.86000127)
+texture = ExtResource("1_kvr73")
+
+[node name="Table" type="Sprite2D" parent="."]
+position = Vector2(357, 956.001)
+scale = Vector2(2.8531468, 4.0999985)
+texture = ExtResource("2_ub1um")
+
+[node name="Brush" type="Sprite2D" parent="."]
+position = Vector2(57.99997, 1127.001)
+scale = Vector2(0.08, 0.08)
+
+[node name="box" parent="." instance=ExtResource("3_f4upy")]
+position = Vector2(192, 704)
+scale = Vector2(2, 2)
+script = ExtResource("4_gwiom")
+photo_scene = ExtResource("8_ou7cm")
+table_position = Vector2(306, 1070)
+
+[node name="Dustbroom" type="Sprite2D" parent="."]
+z_index = 10
+position = Vector2(65, 1113.001)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("7_w6xt4")
+script = ExtResource("3_hu5cc")
+audio_delay = 0.5
+
+[node name="dragArea" type="Area2D" parent="Dustbroom"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dustbroom/dragArea"]
+position = Vector2(-2.3841858e-06, -125.00813)
+shape = SubResource("RectangleShape2D_ou7cm")
+
+[node name="tipArea" type="Area2D" parent="Dustbroom"]
+position = Vector2(-8.333333, 124.99186)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dustbroom/tipArea"]
+position = Vector2(0, 319.99997)
+shape = SubResource("CircleShape2D_hu5cc")
+
+[node name="broom_audio" type="AudioStreamPlayer" parent="Dustbroom"]
+stream = ExtResource("9_p5ng8")
+
+[node name="NegativeMachine" type="Sprite2D" parent="."]
+position = Vector2(559, 695)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_wekqd")
+
+[node name="front" type="Sprite2D" parent="NegativeMachine"]
+z_index = 2
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("10_w6xt4")
+
+[node name="negativeArea" type="Area2D" parent="NegativeMachine"]
+z_index = 2
+position = Vector2(0, -116.000015)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NegativeMachine/negativeArea"]
+position = Vector2(4, -14.607178)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("RectangleShape2D_h5fmv")
+
+[node name="Trashcan" type="Sprite2D" parent="."]
+position = Vector2(575.00006, 1072)
+scale = Vector2(0.37, 0.37)
+texture = ExtResource("11_w6xt4")
+
+[node name="trashArea" type="Area2D" parent="Trashcan"]
+position = Vector2(5.4052258, 137.83789)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trashcan/trashArea"]
+position = Vector2(-16.216187, -36.486572)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_w6xt4")
+
+[node name="savePic" type="Area2D" parent="."]
+position = Vector2(330, 1307.001)
+scale = Vector2(0.15, 0.15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="savePic"]
+position = Vector2(206.66663, -6.666992)
+shape = SubResource("RectangleShape2D_hu5cc")
+
+[node name="throwAway" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_wekqd")
+
+[node name="negative_machine" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_fxo3e")
+
+[node name="save_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_6cyv8")
+
+[connection signal="area_entered" from="Dustbroom/tipArea" to="Dustbroom" method="_on_tip_area_area_entered"]
+[connection signal="area_entered" from="NegativeMachine/negativeArea" to="." method="_on_negative_area_area_entered"]
+[connection signal="area_exited" from="NegativeMachine/negativeArea" to="." method="_on_negative_area_area_exited"]
+[connection signal="area_entered" from="Trashcan/trashArea" to="." method="_on_trash_area_area_entered"]
+[connection signal="area_exited" from="Trashcan/trashArea" to="." method="_on_trash_area_area_exited"]
+[connection signal="area_entered" from="savePic" to="." method="_on_save_pic_area_entered"]
+[connection signal="area_exited" from="savePic" to="." method="_on_save_pic_area_exited"]

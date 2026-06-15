@@ -1,0 +1,58 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="play-ml"
+run/main_scene="res://scenes/office.tscn"
+config/features=PackedStringArray("4.5", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+SignalManager="*res://scripts/SignalManager.gd"
+brain="*res://scripts/brain.gd"
+PipelineManager="*res://scripts/pipeline_manager.gd"
+
+[dialogue_manager]
+
+editor/advanced/custom_test_scene_path="uid://cqk4qn0kd57na"
+runtime/balloon_path="uid://pba86r7gu1l3"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/size/window_width_override=360
+window/size/window_height_override=640
+window/stretch/mode="canvas_items"
+window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[global_group]
+
+draggable-box=""
+gen_area=""
+dust=""
+pic_area=""
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialogue.dialogue")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfl3nhuvydmhq"]
+
+[ext_resource type="Texture2D" uid="uid://2efl5a887o0a" path="res://assets/report.png" id="1_66ide"]
+[ext_resource type="Texture2D" uid="uid://c0ke226kjt4vr" path="res://assets/pet/vvv.png" id="2_q5px1"]
+[ext_resource type="Texture2D" uid="uid://cvnfl0kskxvij" path="res://assets/pieChartDokimi.png" id="3_4lv02"]
+[ext_resource type="FontFile" uid="uid://bewvrgv5srv2g" path="res://fonts/VT323-Regular.ttf" id="4_4lv02"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bsvqr"]
+font = ExtResource("4_4lv02")
+font_size = 95
+font_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+
+[node name="Report" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="paper" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 722.0
+offset_bottom = 1277.0
+texture = ExtResource("1_66ide")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="paper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = 28.0
+offset_right = -68.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="paper/VBoxContainer"]
+layout_mode = 2
+text = "FINAL REPORT"
+label_settings = SubResource("LabelSettings_bsvqr")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="paper/VBoxContainer"]
+layout_mode = 2
+
+[node name="pet" type="TextureRect" parent="paper/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_q5px1")
+
+[node name="chart" type="TextureRect" parent="paper/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_4lv02")
+
+[node name="notes" type="RichTextLabel" parent="paper/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_4lv02")
+theme_override_fonts/bold_font = ExtResource("4_4lv02")
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "
+
+
+
+
+
+
+
+[color=#222222]
+• [b]GLOBAL SCORE:[/b] 80%
+• [b]PET EVALUATION:[/b] SUCCESFULLY RECOGNISES ALL CLASSES
+• [b]CONFIDENCE PER CLASS:[/b] BIRDS (41%), DOGS (29%), CATS (29%).
+• [b]QUALITY OF BIRD CLASS DATA:[/b] 100%
+• [b]QUALITY OF DOG CLASS DATA:[/b] 70%
+• [b]QUALITY OF CAT CLASS DATA:[/b] 70%
+
+• [b]COMMENTS:[/b] 
+- THE PET HAS BEEN TRAINED VERY WELL. HOWEVER IT'S CONFIDENCE TO THE BIRD CLASS IS HIGHER THAN THE OTHERS. IF IT HAS TO UNDERSTAND A DAMAGED OR DIRTY NEW PICTURE, IT WILL ALWAYS LEAN TOWARDS [b]BIRD[/b].
+
+• [b]FUTURE SUGGESTIONS:[/b] 
+- NEXT TIME, TRY COLLECTING AN EQUAL AMOUNT OF PHOTOS FOR ALL ANIMALS TO CREATE A PERFECTLY BALANCED DIGITAL BRAIN.[/color]"
+fit_content = true
+vertical_alignment = 2

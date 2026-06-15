@@ -1,0 +1,107 @@
+~ start
+Doctor: Welcome to my laboratory.
+
+Doctor: Do you see this little creature on the table?
+
+Doctor: It may look small now…
+
+Doctor: …but this is your new AI pet.
+
+Doctor: Have you ever wondered how machines learn?
+
+Doctor: Do you think an AI is born smart?
+
+Doctor: Or do you think it must be taught?
+
+Doctor: Just like a child.
+
+Doctor: Just like you.
+
+Doctor: This little AI knows nothing yet.
+
+Doctor: No words.
+
+Doctor: No images.
+
+Doctor: No meaning.
+
+Doctor: So how do we teach it?
+
+Doctor: We start by showing it the world.
+
+Doctor: And giving names to what it sees.
+
+Doctor: What do you think we call this process?
+
+Doctor: Labeling.
+
+Doctor: Have you heard this word before?
+
+Doctor: Labeling means giving a name to something.
+
+Doctor: This is a cat.
+
+Doctor: This is a dog.
+
+Doctor: This is a bird.
+
+Doctor: Simple for you.
+
+Doctor: But for an AI?
+
+Doctor: It is everything.
+
+Doctor: If we give the wrong names…
+
+Doctor: What do you think will happen?
+
+Doctor: It will learn the wrong things.
+
+Doctor: And if we teach it correctly?
+
+Doctor: It will become smarter.
+
+Doctor: Stronger.
+
+Doctor: Better prepared.
+
+Doctor: Your AI pet depends on you.
+
+Doctor: The better you teach it…
+
+Doctor: …the better it will learn.
+
+Doctor: Are you ready to start training it?
+
+Doctor: Good.
+
+Doctor: Let’s begin your first lesson.
+
+Doctor: Image labeling.
+=> END
+
+~ cleanup_intro
+Doctor: Welcome to the Data Preprocessing module!
+
+Doctor: Here, you must clean the images before feeding them to the AI. 
+
+Doctor: A model is only as good as its data!
+=> END
+
+~ cleanup_warning
+Doctor: Watch out! That image has too much noise (dust).
+Doctor: If you train the AI with noisy data, it will get confused and its accuracy will drop. Use the brush!
+=> END
+
+~ cleanup_success
+Doctor: Spotless! This high-quality data will help your AI learn the features of the animal perfectly. Keep it up!
+=> END
+
+~ labeling_intro
+Doctor: Labeling is the foundation of Supervised Learning. We must show the AI exactly what each image represents!
+=> END
+
+~ report_intro
+Doctor: The training is over, but a Data Scientist's job isn't done yet. It's time for the Evaluation Phase!
+Doctor: Let's review the final metrics to understand our model's true performance.
+=> END

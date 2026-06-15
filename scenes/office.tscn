@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://boxpyvk684nvo"]
+
+[ext_resource type="Texture2D" uid="uid://cp8ew5nxja8h8" path="res://assets/bg.png" id="1_j531b"]
+[ext_resource type="Script" uid="uid://d34msn12cyha" path="res://scripts/inputManagement.gd" id="1_nhk36"]
+[ext_resource type="Texture2D" uid="uid://j5agwl6kgaal" path="res://assets/doctuh/doctuhIdle.png" id="1_rkdgt"]
+[ext_resource type="Texture2D" uid="uid://c6ia8rei3fugm" path="res://assets/pet/firstStage/firstStage2.png" id="2_br52l"]
+[ext_resource type="Texture2D" uid="uid://ce675mn67n5v6" path="res://assets/table.png" id="4_qhs48"]
+
+[node name="office" type="Node2D"]
+script = ExtResource("1_nhk36")
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(361, 641)
+scale = Vector2(0.782, 0.844)
+texture = ExtResource("1_j531b")
+
+[node name="pet" type="Sprite2D" parent="."]
+position = Vector2(361, 1059)
+scale = Vector2(1, 1.025)
+texture = ExtResource("2_br52l")
+
+[node name="doctor" type="Sprite2D" parent="."]
+position = Vector2(210, 1030)
+texture = ExtResource("1_rkdgt")
+
+[node name="table" type="Sprite2D" parent="doctor"]
+position = Vector2(149, 135)
+scale = Vector2(0.91, 1)
+texture = ExtResource("4_qhs48")

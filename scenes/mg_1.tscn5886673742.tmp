@@ -1,0 +1,109 @@
+[gd_scene load_steps=17 format=3 uid="uid://c48b7c1l33n6y"]
+
+[ext_resource type="Texture2D" uid="uid://cp8ew5nxja8h8" path="res://assets/bg.png" id="1_kvr73"]
+[ext_resource type="Script" uid="uid://ctnp866rclaw0" path="res://scripts/mg_1.gd" id="1_ttick"]
+[ext_resource type="Texture2D" uid="uid://niffgilt08ef" path="res://assets/mg1/tablemg1.png" id="2_nco8v"]
+[ext_resource type="Texture2D" uid="uid://bkv42p8ngam7v" path="res://assets/mg1/dogLabel.png" id="4_ldp4w"]
+[ext_resource type="Texture2D" uid="uid://c012r24co24hl" path="res://assets/mg1/catLabel.png" id="5_mxi3s"]
+[ext_resource type="Texture2D" uid="uid://dmtp8twp51d28" path="res://assets/mg1/birdLabel.png" id="6_pmvpg"]
+[ext_resource type="PackedScene" uid="uid://d26nnc5ocok0k" path="res://scenes/draggable_obj.tscn" id="7_un88t"]
+[ext_resource type="Texture2D" uid="uid://canjt2ceg4dnj" path="res://assets/mg1/animalCards/cat3.png" id="8_4iwee"]
+[ext_resource type="Texture2D" uid="uid://cmpt544q48qac" path="res://assets/mg1/animalCards/bird1.png" id="8_uqnqf"]
+[ext_resource type="Texture2D" uid="uid://dnntb67sq4ha6" path="res://assets/mg1/animalCards/dog1.png" id="9_rn5wu"]
+[ext_resource type="Texture2D" uid="uid://d25rmtdip6s0t" path="res://assets/mg1/animalCards/dog2.png" id="10_k8ksd"]
+[ext_resource type="Texture2D" uid="uid://b8qjtvswttj17" path="res://assets/mg1/animalCards/dog3.png" id="11_e3y17"]
+[ext_resource type="PackedScene" uid="uid://dajq5cmhkp708" path="res://scenes/box.tscn" id="12_pmgg8"]
+[ext_resource type="Texture2D" uid="uid://teiqayecoey1" path="res://assets/mg1/animalCards/bird2.png" id="13_r6dgu"]
+[ext_resource type="Texture2D" uid="uid://25amt4mqmld3" path="res://assets/mg1/animalCards/bird3.png" id="14_r7kdb"]
+[ext_resource type="Texture2D" uid="uid://dt6r63y07e6yc" path="res://assets/mg1/animalCards/cat2.png" id="15_dugam"]
+
+[node name="mg1" type="Node2D"]
+position = Vector2(-98, 561)
+script = ExtResource("1_ttick")
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(436, -8)
+texture = ExtResource("1_kvr73")
+
+[node name="Tablemg1" type="Sprite2D" parent="."]
+position = Vector2(458.6, 356.8)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("2_nco8v")
+
+[node name="cat3" parent="." instance=ExtResource("7_un88t")]
+position = Vector2(659.8, -243.2)
+texture = ExtResource("8_4iwee")
+type = "cat"
+
+[node name="dog1" parent="." instance=ExtResource("7_un88t")]
+position = Vector2(258.8, -53)
+texture = ExtResource("9_rn5wu")
+type = "dog"
+
+[node name="dog3" parent="." instance=ExtResource("7_un88t")]
+position = Vector2(658.8, -53)
+texture = ExtResource("11_e3y17")
+type = "dog"
+
+[node name="bird1" parent="." instance=ExtResource("7_un88t")]
+position = Vector2(258.8, 148.8)
+texture = ExtResource("8_uqnqf")
+type = "bird"
+
+[node name="bird2" parent="." instance=ExtResource("7_un88t")]
+position = Vector2(459.8, 149.8)
+texture = ExtResource("13_r6dgu")
+type = "bird"
+
+[node name="bird3" parent="." instance=ExtResource("7_un88t")]
+position = Vector2(653.8, 148.8)
+texture = ExtResource("14_r7kdb")
+type = "bird"
+
+[node name="dog2" parent="." instance=ExtResource("7_un88t")]
+position = Vector2(463, -53)
+texture = ExtResource("10_k8ksd")
+type = "dog"
+
+[node name="cat2" parent="." instance=ExtResource("7_un88t")]
+position = Vector2(459.8, -243.2)
+texture = ExtResource("15_dugam")
+type = "cat"
+
+[node name="cat1" parent="." instance=ExtResource("7_un88t")]
+position = Vector2(259.8, -243.2)
+type = "cat"
+
+[node name="dogBox" parent="." groups=["draggable-box"] instance=ExtResource("12_pmgg8")]
+position = Vector2(249.6, 484.8)
+scale = Vector2(1.5, 1.5)
+type = "dog"
+
+[node name="dogLabel" type="Sprite2D" parent="dogBox"]
+position = Vector2(-5, 5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_ldp4w")
+
+[node name="catBox" parent="." groups=["draggable-box"] instance=ExtResource("12_pmgg8")]
+position = Vector2(470, 485)
+scale = Vector2(1.5, 1.5)
+type = "cat"
+
+[node name="catLabel" type="Sprite2D" parent="catBox"]
+position = Vector2(-5, 5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_mxi3s")
+
+[node name="birdBox" parent="." groups=["draggable-box"] instance=ExtResource("12_pmgg8")]
+position = Vector2(680.6, 484.8)
+scale = Vector2(1.5, 1.5)
+type = "bird"
+
+[node name="birdLabel" type="Sprite2D" parent="birdBox"]
+position = Vector2(-5, 5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_pmvpg")
+
+[connection signal="area_entered" from="dogBox" to="." method="_on_dog_box_area_entered"]
+[connection signal="area_entered" from="catBox" to="." method="_on_cat_box_area_entered"]
+[connection signal="area_entered" from="birdBox" to="." method="_on_bird_box_area_entered"]

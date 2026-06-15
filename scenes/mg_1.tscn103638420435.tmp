@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3 uid="uid://bf4k7bob6ip0h"]
+
+[ext_resource type="Script" uid="uid://clm7co3klvo5d" path="res://scripts/mg_1.gd" id="1_h5fmv"]
+[ext_resource type="Texture2D" uid="uid://cp8ew5nxja8h8" path="res://assets/bg.png" id="1_kvr73"]
+[ext_resource type="Texture2D" uid="uid://dfps26ukwtki0" path="res://assets/mg1/table.png" id="2_ub1um"]
+[ext_resource type="PackedScene" uid="uid://dajq5cmhkp708" path="res://scenes/box.tscn" id="3_f4upy"]
+[ext_resource type="Script" uid="uid://dgegwbjck3baw" path="res://scripts/broom.gd" id="3_hu5cc"]
+[ext_resource type="Texture2D" uid="uid://bm871qo6csund" path="res://assets/mg1/dustbroom.png" id="4_f4upy"]
+[ext_resource type="Script" uid="uid://c3y74tn6aaa8n" path="res://scripts/box_mg_1.gd" id="4_gwiom"]
+[ext_resource type="Texture2D" uid="uid://bykgwot0sln6x" path="res://assets/mg1/negativeMachine.png" id="5_gwiom"]
+[ext_resource type="Texture2D" uid="uid://lckt3ul61vbg" path="res://assets/mg1/trashcan.png" id="6_ou7cm"]
+[ext_resource type="PackedScene" uid="uid://d26nnc5ocok0k" path="res://scenes/draggable_obj.tscn" id="8_ou7cm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ou7cm"]
+size = Vector2(446.6667, 1033.3335)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hu5cc"]
+radius = 260.08545
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hu5cc"]
+size = Vector2(5160, 776.6665)
+
+[node name="mg1" type="Node2D"]
+script = ExtResource("1_h5fmv")
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(361, 563)
+scale = Vector2(0.782, 0.74)
+texture = ExtResource("1_kvr73")
+
+[node name="Table" type="Sprite2D" parent="."]
+position = Vector2(357, 891)
+scale = Vector2(2.8531468, 3.4999995)
+texture = ExtResource("2_ub1um")
+
+[node name="Brush" type="Sprite2D" parent="."]
+position = Vector2(57.99997, 1062)
+scale = Vector2(0.08, 0.08)
+
+[node name="box" parent="." instance=ExtResource("3_f4upy")]
+position = Vector2(192, 685)
+scale = Vector2(2, 2)
+script = ExtResource("4_gwiom")
+photo_scene = ExtResource("8_ou7cm")
+table_position = Vector2(320, 981)
+
+[node name="Dustbroom" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(65, 1048)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("4_f4upy")
+script = ExtResource("3_hu5cc")
+
+[node name="dragArea" type="Area2D" parent="Dustbroom"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dustbroom/dragArea"]
+position = Vector2(3.3333435, -50)
+shape = SubResource("RectangleShape2D_ou7cm")
+
+[node name="tipArea" type="Area2D" parent="Dustbroom"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dustbroom/tipArea"]
+position = Vector2(0, 319.99997)
+shape = SubResource("CircleShape2D_hu5cc")
+
+[node name="NegativeMachine" type="Sprite2D" parent="."]
+position = Vector2(565, 513)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_gwiom")
+
+[node name="Trashcan" type="Sprite2D" parent="."]
+position = Vector2(571.00006, 978)
+scale = Vector2(0.5885417, 0.6267361)
+texture = ExtResource("6_ou7cm")
+
+[node name="savePic" type="Area2D" parent="."]
+position = Vector2(330, 1242)
+scale = Vector2(0.15, 0.15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="savePic"]
+position = Vector2(206.66663, -6.666992)
+shape = SubResource("RectangleShape2D_hu5cc")
+
+[connection signal="area_entered" from="Dustbroom/tipArea" to="Dustbroom" method="_on_tip_area_area_entered"]
+[connection signal="area_entered" from="savePic" to="." method="_on_save_pic_area_entered"]

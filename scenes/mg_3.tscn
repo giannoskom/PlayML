@@ -1,0 +1,86 @@
+[gd_scene load_steps=14 format=3 uid="uid://bnyyuwcpv1xfk"]
+
+[ext_resource type="Script" uid="uid://0b1lgqt3x2px" path="res://scripts/mg_3.gd" id="1_5kqf7"]
+[ext_resource type="Texture2D" uid="uid://dbxhff17ln2q8" path="res://assets/mg3/bg.png" id="2_on67c"]
+[ext_resource type="PackedScene" uid="uid://d26nnc5ocok0k" path="res://scenes/draggable_obj.tscn" id="2_ts8wd"]
+[ext_resource type="Texture2D" uid="uid://ce675mn67n5v6" path="res://assets/table.png" id="3_kbpve"]
+[ext_resource type="Texture2D" uid="uid://c6ia8rei3fugm" path="res://assets/pet/firstStage/firstStage2.png" id="4_g5y1x"]
+[ext_resource type="Texture2D" uid="uid://bmgxnhqyq880n" path="res://assets/mg3/control_panel2.png" id="5_kbpve"]
+[ext_resource type="Texture2D" uid="uid://bp65nwmqtgg27" path="res://assets/mg3/button_train.png" id="6_kbpve"]
+[ext_resource type="Script" uid="uid://c3c8431opafnh" path="res://scripts/button_train.gd" id="7_on67c"]
+[ext_resource type="Texture2D" uid="uid://dsw8exl4cypfn" path="res://assets/mg3/button_test.png" id="8_g5y1x"]
+[ext_resource type="Script" uid="uid://ch610ty6muy6s" path="res://scripts/button_test.gd" id="9_g5y1x"]
+[ext_resource type="PackedScene" uid="uid://c0c88ndv2l71j" path="res://scenes/monitor.tscn" id="10_h4q23"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1on3w"]
+bg_color = Color(4.6205523e-06, 0.7494824, 0.93628335, 0.15686275)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(18.892157, 18.892157, 18.892157, 0.5882353)
+shadow_color = Color(0, 0, 0, 0.23529412)
+shadow_size = 4
+shadow_offset = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5kqf7"]
+radius = 34.103264
+
+[node name="Mg3" type="Node2D"]
+script = ExtResource("1_5kqf7")
+photo_scene = ExtResource("2_ts8wd")
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(358, 250)
+texture = ExtResource("2_on67c")
+
+[node name="Table" type="Sprite2D" parent="."]
+position = Vector2(359, 518)
+texture = ExtResource("3_kbpve")
+
+[node name="pet" type="Sprite2D" parent="."]
+position = Vector2(358, 415)
+texture = ExtResource("4_g5y1x")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 719.0
+offset_bottom = 549.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1on3w")
+
+[node name="control_panel" type="Sprite2D" parent="."]
+position = Vector2(362, 917.00006)
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("5_kbpve")
+
+[node name="button_train" type="Sprite2D" parent="control_panel"]
+position = Vector2(-69.13043, 63.04346)
+scale = Vector2(1.02, 1.02)
+texture = ExtResource("6_kbpve")
+
+[node name="Area2D" type="Area2D" parent="control_panel/button_train"]
+script = ExtResource("7_on67c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="control_panel/button_train/Area2D"]
+position = Vector2(-0.42625743, -1.7050297)
+shape = SubResource("CircleShape2D_5kqf7")
+
+[node name="button_test" type="Sprite2D" parent="control_panel"]
+position = Vector2(73.04347, 63.04346)
+scale = Vector2(1.02, 1.02)
+texture = ExtResource("8_g5y1x")
+
+[node name="Area2D" type="Area2D" parent="control_panel/button_test"]
+script = ExtResource("9_g5y1x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="control_panel/button_test/Area2D"]
+position = Vector2(-0.42625743, -1.7050297)
+shape = SubResource("CircleShape2D_5kqf7")
+
+[node name="Monitor" parent="." instance=ExtResource("10_h4q23")]
+offset_left = 162.0
+offset_top = 550.0
+offset_right = 162.0
+offset_bottom = 550.0
+scale = Vector2(0.6784333, 0.80954087)
+
+[node name="feed" type="AudioStreamPlayer" parent="."]

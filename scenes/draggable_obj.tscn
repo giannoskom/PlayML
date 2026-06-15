@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://d26nnc5ocok0k"]
+
+[ext_resource type="Texture2D" uid="uid://d0vbnm11104pd" path="res://assets/mg2/animalCards/cat1.png" id="1_fnwdn"]
+[ext_resource type="AudioStream" uid="uid://epthrb5txxlu" path="res://sounds/card_in.mp3" id="2_301no"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvi3p"]
+size = Vector2(566.667, 590)
+
+[node name="draggableObj" type="Sprite2D"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_fnwdn")
+
+[node name="Area2D" type="Area2D" parent="." groups=["pic_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.00012207, 1.6665)
+shape = SubResource("RectangleShape2D_fvi3p")
+
+[node name="cardPlay" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_301no")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
