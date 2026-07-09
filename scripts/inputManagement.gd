@@ -4,7 +4,7 @@ extends Node
 
 func _ready() -> void:
 	var resource = preload("res://dialogue.dialogue")
-	var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, 'start')
+	var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, 'game_intro')
 
 
 

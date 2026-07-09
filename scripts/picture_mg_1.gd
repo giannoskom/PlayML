@@ -10,7 +10,7 @@ var total_dust = 0
 var is_in_save_zone = false
 var is_in_neg_machine = false
 var is_in_trashcan = false
-
+var is_animating = false
 @onready var audio = $cardPlay
 
 func _ready():
@@ -19,8 +19,11 @@ func _ready():
 		call_deferred("generate_dust")
 	else:
 		total_dust = 1
-
 func _input(event: InputEvent) -> void:
+
+	if is_animating:
+		return
+		
 	if is_active:
 		if event is InputEventMouseButton:
 			if event.pressed:
@@ -29,7 +32,7 @@ func _input(event: InputEvent) -> void:
 					draggable = true
 					touchOffset = get_global_mouse_position() - global_position
 					
-			else :
+			else:
 				draggable = false
 				if is_in_save_zone == true:
 					var drop_tween = create_tween()
@@ -42,10 +45,12 @@ func _input(event: InputEvent) -> void:
 					
 					PipelineManager.save_photo_to_pipeline(self.texture.resource_path, type, is_negative, per, get_remaining_dust_positions())
 					drop_tween.tween_callback(self.queue_free)
+					
 				elif is_in_neg_machine:
+					is_animating = true
+					
 					var in_pos = Vector2(561, 482)
 					var out_pos = Vector2(561, 845)
-			
 			
 					var machine_tween = create_tween()
 					machine_tween.tween_property(self, "scale", Vector2(0.3, 0.3), 0.15).set_trans(Tween.TRANS_SINE)
@@ -58,7 +63,6 @@ func _input(event: InputEvent) -> void:
 					machine_tween.tween_property(self, "global_position", in_pos + Vector2(0, 180), 0.4)\
 					.set_trans(Tween.TRANS_SINE)
 			
-	
 					machine_tween.tween_callback(func():
 						if is_negative:
 							self.material = null
@@ -68,10 +72,8 @@ func _input(event: InputEvent) -> void:
 							self.material = negative_material
 					)
 			
-	
 					machine_tween.tween_interval(0.3)
 			
-		
 					machine_tween.tween_property(self, "global_position", out_pos, 0.4)\
 					.set_trans(Tween.TRANS_SINE)
 				
@@ -79,7 +81,9 @@ func _input(event: InputEvent) -> void:
 						z_index = 3
 						scale=Vector2(0.4, 0.4)
 						_send_back()
+						is_animating = false
 					)
+					
 				elif is_in_trashcan:
 					trash.emit()
 					self.queue_free()

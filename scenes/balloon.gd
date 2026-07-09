@@ -134,7 +134,7 @@ func apply_dialogue_line() -> void:
 	character_label.visible = not dialogue_line.character.is_empty()
 	character_label.text = tr(dialogue_line.character, "dialogue")
 	var portrait_path: String = "res://assets/doctuh/%s.png" % dialogue_line.character.to_lower()
-	if FileAccess.file_exists(portrait_path):
+	if ResourceLoader.exists(portrait_path):
 		portrait.texture = load(portrait_path)
 	else:
 		portrait.texture = null

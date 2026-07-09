@@ -41,6 +41,7 @@ texture = ExtResource("3_kbpve")
 [node name="pet" type="Sprite2D" parent="."]
 position = Vector2(358, 415)
 texture = ExtResource("4_g5y1x")
+region_rect = Rect2(0, 0, 160, 160)
 
 [node name="Panel" type="Panel" parent="."]
 offset_right = 719.0
@@ -48,6 +49,7 @@ offset_bottom = 549.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1on3w")
 
 [node name="control_panel" type="Sprite2D" parent="."]
+z_index = 2
 position = Vector2(362, 917.00006)
 scale = Vector2(2.3, 2.3)
 texture = ExtResource("5_kbpve")

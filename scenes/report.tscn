@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfl3nhuvydmhq"]
+[gd_scene load_steps=7 format=3 uid="uid://bfl3nhuvydmhq"]
 
 [ext_resource type="Texture2D" uid="uid://2efl5a887o0a" path="res://assets/report.png" id="1_66ide"]
-[ext_resource type="Texture2D" uid="uid://c0ke226kjt4vr" path="res://assets/pet/vvv.png" id="2_q5px1"]
-[ext_resource type="Texture2D" uid="uid://cvnfl0kskxvij" path="res://assets/pieChartDokimi.png" id="3_4lv02"]
+[ext_resource type="Script" uid="uid://5elq8tswaen1" path="res://scripts/report.gd" id="1_bsvqr"]
 [ext_resource type="FontFile" uid="uid://bewvrgv5srv2g" path="res://fonts/VT323-Regular.ttf" id="4_4lv02"]
+[ext_resource type="Script" uid="uid://cmo1m1hc4rbwq" path="res://scripts/pie_chart.gd" id="4_bsvqr"]
+[ext_resource type="Texture2D" uid="uid://5ghrnw8ur70c" path="res://assets/pet/xvx.png" id="4_txauj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bsvqr"]
 font = ExtResource("4_4lv02")
@@ -13,6 +14,7 @@ font_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 [node name="Report" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_bsvqr")
 
 [node name="paper" type="TextureRect" parent="."]
 layout_mode = 0
@@ -44,12 +46,26 @@ layout_mode = 2
 [node name="pet" type="TextureRect" parent="paper/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_q5px1")
+texture = ExtResource("4_txauj")
 
-[node name="chart" type="TextureRect" parent="paper/VBoxContainer/HBoxContainer"]
+[node name="chart" type="Control" parent="paper/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(350, 350)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("3_4lv02")
+script = ExtResource("4_bsvqr")
+
+[node name="Legend_text" type="RichTextLabel" parent="paper/VBoxContainer/HBoxContainer/chart"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.067
+anchor_right = 0.067
+anchor_bottom = 0.067
+offset_left = -20.450006
+offset_top = 327.55
+offset_right = 273.55
+offset_bottom = 406.55
+bbcode_enabled = true
 
 [node name="notes" type="RichTextLabel" parent="paper/VBoxContainer"]
 layout_mode = 2

@@ -1,5 +1,7 @@
 extends Node2D
 
+var resource = preload("res://dialogue.dialogue")
+
 var correct := 0
 @export var photo_scene : PackedScene 
 @onready var save_audio = $save_audio
@@ -13,15 +15,12 @@ var grid_positions = [
 var unspawned_data = []
 var active_photos_on_table = 0
 
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_1:
-			DialogueManager.show_dialogue_balloon(load("res://dialogue.dialogue"), "labeling_intro")
-
 func _ready() -> void:
 	SignalManager.correct_box.connect(check_for_next_wave)
 	
-	unspawned_data = PipelineManager.get_dataset().duplicate() 
+	unspawned_data = PipelineManager.get_dataset().duplicate()
+	var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, 'level_2')
+	await DialogueManager.dialogue_ended
 	print(unspawned_data.size())
 	spawn_next_wave()
 	
@@ -78,4 +77,6 @@ func check_for_next_wave(a, b, c):
 			spawn_next_wave()
 		else:
 			print('telos')
+			var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, 'level_2_close')
+			await DialogueManager.dialogue_ended
 			get_tree().change_scene_to_file("res://scenes/mg_3.tscn")

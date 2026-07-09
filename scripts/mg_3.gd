@@ -5,17 +5,15 @@ extends Node2D
 var unspawned_data
 @onready var monitor_ui = $Monitor
 
-@onready var ai_pet = $pet 
+@onready var pet = $pet 
 
 var evaluation
-
-func _input(event):
-
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_1:
-			DialogueManager.show_dialogue_balloon(load("res://dialogue.dialogue"), "report_intro")
+const TABLE_POSITION = 443
+var resource = load("res://dialogue.dialogue")
 
 func _ready() -> void:
+	DialogueManager.show_dialogue_balloon(resource, "level_3")
+	await DialogueManager.dialogue_ended
 	SignalManager.button_train_pressed.connect(button_train_pressed)
 	SignalManager.button_test_pressed.connect(button_test_pressed)
 	unspawned_data = PipelineManager.get_dataset().duplicate() 
@@ -29,8 +27,15 @@ func button_test_pressed():
 	
 	
 	var test_set = [
-		{"type": "dog", "texture": "res://assets/mg2/animalCards/dog1.png"},
-		{"type": "cat", "texture": "res://assets/mg2/animalCards/cat1.png"},
+		{"type": "dog", "texture": "res://assets/mg3/testSet/dog1.png"},
+		{"type": "dog", "texture": "res://assets/mg3/testSet/dog2.png"},
+		{"type": "dog", "texture": "res://assets/mg3/testSet/dog3.png"},
+		{"type": "cat", "texture": "res://assets/mg3/testSet/cat1.png"},
+		{"type": "cat", "texture": "res://assets/mg3/testSet/cat2.png"},
+		{"type": "cat", "texture": "res://assets/mg3/testSet/cat3.png"},
+		{"type": "bird", "texture": "res://assets/mg3/testSet/bird1.png"},
+		{"type": "bird", "texture": "res://assets/mg3/testSet/bird2.png"},
+		{"type": "bird", "texture": "res://assets/mg3/testSet/bird3.png"}
 	]
 	
 	var correct_answers = 0
@@ -52,10 +57,31 @@ func button_test_pressed():
 		else:
 			is_correct = false
 			var bias_class = evaluation.get("dominant_class", "UNKNOWN")
-			stamp_text = "❌ " + bias_class.to_upper()
+			var guessed_class = ""
+			
+			# Αν το bias ΔΕΝ είναι η σωστή απάντηση, το AI πέφτει στην παγίδα του bias του
+			if bias_class != true_class and bias_class != "UNKNOWN":
+				guessed_class = bias_class
+			else:
+				# Αν το bias ΕΙΝΑΙ η σωστή απάντηση (αλλά απέτυχε τη ζαριά), 
+				# ψάχνουμε την αμέσως επόμενη πιο δυνατή κλάση από τα scores.
+				var highest_wrong_score = -1.0
+				guessed_class = "UNKNOWN"
+				
+				for c_name in evaluation["class_scores"].keys():
+					# Αγνοούμε την αληθινή κλάση για να βρούμε το "δεύτερο" bias
+					if c_name != true_class:
+						if evaluation["class_scores"][c_name] > highest_wrong_score:
+							highest_wrong_score = evaluation["class_scores"][c_name]
+							guessed_class = c_name
+			
+			stamp_text = "❌ " + guessed_class.to_upper()
 		await monitor_ui.play_test_animation(item["texture"], is_correct, stamp_text)
 		
-	print("Τελικό Σκορ Test: ", correct_answers, "/10")
+	PipelineManager.test_score = correct_answers
+	DialogueManager.show_dialogue_balloon(resource, "level_3_close")
+	await DialogueManager.dialogue_ended
+	get_tree().change_scene_to_file("res://scenes/report.tscn")
 
 
 func button_train_pressed():
@@ -88,7 +114,10 @@ func button_train_pressed():
 
 	monitor_ui.display_scores(class_scores)
 	monitor_ui.show_loading(false)
-	print(evaluation)
+	evolve_pet(class_scores)
+	pet.global_position.y = TABLE_POSITION - (pet.texture.get_size().y / 2.0)
+	PipelineManager.save_data_for_pie(evaluation)
+	DialogueManager.show_dialogue_balloon(resource, "level_3_test")
 
 func throw_image_to_pet(data_entry: Dictionary):
 
@@ -101,6 +130,7 @@ func throw_image_to_pet(data_entry: Dictionary):
 	new_photo.dust_percentage = data_entry.get("dirty_percentage", 0.0)
 	new_photo.dust_positions = data_entry.get("dust_positions", [])
 	new_photo.texture = load(data_entry["texture"])
+	new_photo.z_index = 2
 	
 	add_child(new_photo)
 	
@@ -116,7 +146,7 @@ func throw_image_to_pet(data_entry: Dictionary):
 	var spawn_tween = create_tween()
 	spawn_tween.tween_callback(new_photo.play_audio)
 	
-	spawn_tween.tween_property(new_photo, "global_position", ai_pet.global_position, 0.5)\
+	spawn_tween.tween_property(new_photo, "global_position", pet.global_position, 0.5)\
 		.set_trans(Tween.TRANS_BACK)\
 		.set_ease(Tween.EASE_IN)
 		
@@ -168,6 +198,7 @@ func evaluate_dataset(dataset: Array) -> Dictionary:
 	var highest_score = -1.0
 	var best_class = ""
 	var sum_scores = 0.0
+	var optimal_item_count = 2.0
 	
 	for c_name in target_classes:
 		var stats = class_stats[c_name]
@@ -175,6 +206,8 @@ func evaluate_dataset(dataset: Array) -> Dictionary:
 		
 		if stats["total_items"] > 0:
 			var base_q = (stats["usable_info"] / float(stats["total_items"])) * 100.0
+			var volume_fraction = min(1.0, float(stats["total_items"]) / optimal_item_count)
+			base_q *= volume_fraction
 			var neg_penalty = (float(stats["negatives"]) / float(stats["total_items"])) * negative_weight
 			var dup_penalty = stats["duplicate_penalty"]
 			
@@ -194,3 +227,28 @@ func evaluate_dataset(dataset: Array) -> Dictionary:
 		"class_scores": class_scores,
 		"dominant_class": best_class
 	}
+	
+func evolve_pet(class_scores: Dictionary):
+	var form_name = ""
+	
+	if class_scores.has("bird") and class_scores["bird"] > 50.0:
+		form_name += "v"
+	else:
+		form_name += "x"
+		
+	if class_scores.has("dog") and class_scores["dog"] > 50.0:
+		form_name += "v"
+	else:
+		form_name += "x"
+		
+	if class_scores.has("cat") and class_scores["cat"] > 50.0:
+		form_name += "v"
+	else:
+		form_name += "x"
+		
+	print("Evolution resulting form: ", form_name)
+	
+	var texture_path = "res://assets/pet/" + form_name + ".png"
+	PipelineManager.pet_texture = texture_path
+	
+	pet.texture = load(texture_path)

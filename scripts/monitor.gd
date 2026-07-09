@@ -31,13 +31,22 @@ func play_test_animation(texture_path: String, is_correct: bool, stamp_text: Str
 	stats_container.visible = false
 	test_image.texture = load(texture_path)
 	test_image.visible = true
+	test_image.z_index = 1
 	stamp_label.visible = false
 	
-	test_image.position.x = size.x + 100
+	var screen_width = $screen.size.x
+	
+	# Πιάνουμε το μέγεθος του UI Node, πολλαπλασιασμένο με το scale (αν το έχεις μικρύνει από εκεί)
+	var image_width = test_image.size.x * test_image.scale.x
+	
+	# Ξεκινάει δεξιά, έξω από το screen
+	test_image.position.x = screen_width + 50
 	
 	var tween = create_tween()
 	
-	var center_x = (size.x / 2) - (test_image.size.x / 2)
+	# Το απόλυτο κέντρο!
+	var center_x = (screen_width / 2.0) - (image_width / 2.0)
+	
 	tween.tween_property(test_image, "position:x", center_x, 0.4).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	
 	tween.tween_interval(0.5)
@@ -53,7 +62,8 @@ func play_test_animation(texture_path: String, is_correct: bool, stamp_text: Str
 	
 	tween.tween_interval(1.0)
 	
-	tween.tween_property(test_image, "position:x", -150, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	# Φεύγει προς τα αριστερά
+	tween.tween_property(test_image, "position:x", -image_width - 150, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	tween.parallel().tween_property(stamp_label, "modulate:a", 0.0, 0.3)
 	
 	await tween.finished

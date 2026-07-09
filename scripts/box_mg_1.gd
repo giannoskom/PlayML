@@ -28,85 +28,85 @@ var photo_recipes = [
 		"type": "bird", "is_dirty": false, "is_negative": true
 	},
 	{
-		"texture_path": "res://assets/mg2/animalCards/dog3.png", 
-		"type": "dog", "is_dirty": true, "is_negative": false # Σκονισμένος
+		"texture_path": "res://assets/mg2/animalCards/frog.png", 
+		"type": "frog", "is_dirty": true, "is_negative": true
 	},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/frog.png", 
-		#"type": "frog", "is_dirty": true, "is_negative": true
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/cat1.png", 
-		#"type": "cat", "is_dirty": false, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/bird2.png", 
-		#"type": "bird", "is_dirty": true, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/dog5.png", 
-		#"type": "dog", "is_dirty": true, "is_negative": true # Σκόνη + Αρνητικό!
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/bear.png", 
-		#"type": "bear", "is_dirty": true, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/cat3.png", 
-		#"type": "cat", "is_dirty": false, "is_negative": true
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/bird1.png", 
-		#"type": "bird", "is_dirty": false, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/dog4.png", 
-		#"type": "dog", "is_dirty": false, "is_negative": true
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/dog2.png", 
-		#"type": "dog", "is_dirty": false, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/octapus.png", 
-		#"type": "octapus", "is_dirty": false, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/cat4.png", 
-		#"type": "cat", "is_dirty": false, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/bird3.png", 
-		#"type": "bird", "is_dirty": false, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/dog6.png", 
-		#"type": "dog", "is_dirty": false, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/cat5.png", 
-		#"type": "cat", "is_dirty": true, "is_negative": true
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/dog3.png", 
-		#"type": "dog", "is_dirty": true, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/bird5.png", 
-		#"type": "bird", "is_dirty": true, "is_negative": true
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/axelotl.png", 
-		#"type": "axelotle", "is_dirty": false, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/crocodile.png", 
-		#"type": "crocodile", "is_dirty": false, "is_negative": false
-	#},
-	#{
-		#"texture_path": "res://assets/mg2/animalCards/cat1.png", 
-		#"type": "cat", "is_dirty": false, "is_negative": false
-	#}
+	{
+		"texture_path": "res://assets/mg2/animalCards/cat1.png", 
+		"type": "cat", "is_dirty": false, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/bird2.png", 
+		"type": "bird", "is_dirty": true, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/dog5.png", 
+		"type": "dog", "is_dirty": true, "is_negative": true
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/bear.png", 
+		"type": "bear", "is_dirty": true, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/cat3.png", 
+		"type": "cat", "is_dirty": false, "is_negative": true
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/bird1.png", 
+		"type": "bird", "is_dirty": false, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/dog4.png", 
+		"type": "dog", "is_dirty": false, "is_negative": true
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/dog2.png", 
+		"type": "dog", "is_dirty": false, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/octapus.png", 
+		"type": "octapus", "is_dirty": false, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/bird6.png", 
+		"type": "bird", "is_dirty": true, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/cat4.png", 
+		"type": "cat", "is_dirty": false, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/bird3.png", 
+		"type": "bird", "is_dirty": false, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/dog6.png", 
+		"type": "dog", "is_dirty": false, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/cat5.png", 
+		"type": "cat", "is_dirty": true, "is_negative": true
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/dog3.png", 
+		"type": "dog", "is_dirty": true, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/bird5.png", 
+		"type": "bird", "is_dirty": true, "is_negative": true
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/axelotl.png", 
+		"type": "axelotle", "is_dirty": false, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/crocodile.png", 
+		"type": "crocodile", "is_dirty": false, "is_negative": false
+	},
+	{
+		"texture_path": "res://assets/mg2/animalCards/cat1.png", 
+		"type": "cat", "is_dirty": false, "is_negative": false
+	}
 ]
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
@@ -172,6 +172,7 @@ func spawn_pic():
 		new_photo.initialPos = table_position
 		new_photo.is_active = true
 	)
+	
 func _on_photo_saved():
 	save_audio.play()
 	interactible = true

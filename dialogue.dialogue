@@ -1,107 +1,122 @@
-~ start
-Doctor: Welcome to my laboratory.
+# =====================================================================
+# DOCTOR DIALOGUE FILE (ENGLISH) - DETAILED EDUCATIONAL VERSION
+# =====================================================================
 
-Doctor: Do you see this little creature on the table?
-
-Doctor: It may look small now…
-
-Doctor: …but this is your new AI pet.
-
-Doctor: Have you ever wondered how machines learn?
-
-Doctor: Do you think an AI is born smart?
-
-Doctor: Or do you think it must be taught?
-
-Doctor: Just like a child.
-
-Doctor: Just like you.
-
-Doctor: This little AI knows nothing yet.
-
-Doctor: No words.
-
-Doctor: No images.
-
-Doctor: No meaning.
-
-Doctor: So how do we teach it?
-
-Doctor: We start by showing it the world.
-
-Doctor: And giving names to what it sees.
-
-Doctor: What do you think we call this process?
-
-Doctor: Labeling.
-
-Doctor: Have you heard this word before?
-
-Doctor: Labeling means giving a name to something.
-
-Doctor: This is a cat.
-
-Doctor: This is a dog.
-
-Doctor: This is a bird.
-
-Doctor: Simple for you.
-
-Doctor: But for an AI?
-
-Doctor: It is everything.
-
-Doctor: If we give the wrong names…
-
-Doctor: What do you think will happen?
-
-Doctor: It will learn the wrong things.
-
-Doctor: And if we teach it correctly?
-
-Doctor: It will become smarter.
-
-Doctor: Stronger.
-
-Doctor: Better prepared.
-
-Doctor: Your AI pet depends on you.
-
-Doctor: The better you teach it…
-
-Doctor: …the better it will learn.
-
-Doctor: Are you ready to start training it?
-
-Doctor: Good.
-
-Doctor: Let’s begin your first lesson.
-
-Doctor: Image labeling.
+~ game_intro
+Doctor: Welcome, young researcher, to my next-Gen Smart Pet Lab!
+Doctor: Today, you are going to train your very own digital pet.
+Doctor: To build a successful Machine Learning-Pet, we must follow 5 fundamental steps. Listen closely!
+Doctor: Step 1: Data Collection. We gather the raw information.
+Doctor: Step 2: Pre-processing. We clean the data and remove any noise or errors and bring it all to the same format.
+Doctor: Step 3: Labeling. We categorize the data so the algorithm knows what it is looking at.
+Doctor: Step 4: Training. The algorithm studies the data to find underlying patterns.
+Doctor: Step 5: Evaluation. We test the model on completely new data to see if it actually learned!
+Doctor: I have already collected some images of animals from previous experiments.
+Doctor: Your actions in the next rooms will dictate the intelligence of your pet. Let's head to the first station.
+Doctor: Data Cleaning and Pre-Processing
 => END
 
-~ cleanup_intro
+# =====================================================================
+# LEVEL 1: PRE-PROCESSING & CLEANING
+# =====================================================================
+
+~ level_1
 Doctor: Welcome to the Data Preprocessing module!
 
-Doctor: Here, you must clean the images before feeding them to the AI. 
+Doctor: Here, you must clean the images before feeding them to your pet.
+
+Doctor: You can use the brush to clean it from any Dust (Data Denoising)
+
+Doctor: You should use the negative-machine to bring negative photos to their positive form. (Data Normalization)
+Doctor: Or the other way around if you feel like it.
+
+Doctor: Lastly you can use the bin to throw away any pictures that are not in the classes you want to teach to your pet.
+
+Doctor: Swipe the picture down to keep it!
+
+Doctor: Beaware of pictures that have already passed through the system. we wouldn't want any duplicates in our data-set.
+
+Doctor: You are free to do whatever you want with your data...
+
+Doctor: Just keep in mind...
 
 Doctor: A model is only as good as its data!
 => END
 
-~ cleanup_warning
+~ level_1_warning
 Doctor: Watch out! That image has too much noise (dust).
-Doctor: If you train the AI with noisy data, it will get confused and its accuracy will drop. Use the brush!
+Doctor: If you train your pet with noisy data, it will get confused and its accuracy will drop. Use the brush!
 => END
 
-~ cleanup_success
-Doctor: Spotless! This high-quality data will help your AI learn the features of the animal perfectly. Keep it up!
+~ level_1_success
+Doctor: Spotless! This high-quality data will help your pet learn the features of the animal perfectly. Keep it up!
 => END
 
-~ labeling_intro
-Doctor: Labeling is the foundation of Supervised Learning. We must show the AI exactly what each image represents!
+~ level_1_end
+Doctor: All our data have been cleaned and we are ready to move on to the next stage! Image Labeling.
 => END
 
-~ report_intro
-Doctor: The training is over, but a Data Scientist's job isn't done yet. It's time for the Evaluation Phase!
-Doctor: Let's review the final metrics to understand our model's true performance.
+# =====================================================================
+# LEVEL 2: DATA LABELING & CLASSIFICATION
+# =====================================================================
+
+~ level_2
+Doctor: Labeling is the foundation of Supervised Learning. We must show the pet exactly what each image represents!
+Doctor: Drag and drop each image into its exact class folder.
+Doctor: Be extremely careful though! If you mislabel an image, you introduce bias. 
+Doctor: Your pet will learn the wrong associations and get confused.
+Doctor: Also remeber! Any image that you kept that is not from one of the three classes cannot be thrown away now.
+Doctor: You must put it in a Box but it will cost you in the overall score of the class.
+=> END
+
+
+~ level_2_warning
+Doctor: Remember!! Mislabeling is one of the biggest dangers in Machine Learning!
+=> END
+
+~ level_2_close
+Doctor: Brilliant. Every single data point is now labeled.
+Doctor: We now have our Training Dataset. It is time to feed the algorithm and evaluate the model!
+=> END
+
+# =====================================================================
+# LEVEL 3: TRAINING & EVOLUTION
+# =====================================================================
+
+~ level_3
+Doctor: Welcome to my training lab. This is where the magic happens.
+Doctor: Press the Green "TRAIN" button to feed the data to your pet.
+Doctor: The pet will learn from these and become smarter! Watch it change form!
+=> END
+
+~ level_3_test
+Doctor: Training is complete! The model has converged, and your digital pet has reached its final form. 
+Doctor: But the real question is... how will it perform on our test set?
+Doctor: Press the Red "TEST" button to test your pet on new data
+Doctor: Let's see what form it takes based on the data you provided and how much it scores.
+=> END
+
+~ level_3_close
+Doctor: The testing phase is over.
+Doctor: Your pet had a score of {{PipelineManager.test_score}} /9
+Doctor: Are you ready to check out your final report?
+=> END
+
+# =====================================================================
+# FINAL REPORT & EVALUATION
+# =====================================================================
+
+~ report_remarks
+if PipelineManager.pie_data["global_score"] > 85:
+	Doctor: Incredible! The confidence distribution is optimal. You minimized noise and labeled everything perfectly. Your pet has achieved peak performance. Outstanding scientific work!
+elif PipelineManager.pie_data["global_score"] > 50:
+	Doctor: Not bad. The model is functional and can recognize most patterns. However, some unresolved noise or slight imbalances held it back from its ultimate form. A solid effort!
+else:
+	Doctor: Oh dear. The accuracy is quite low. The model failed to generalize because the training data was either too noisy or heavily mislabeled. This is a great lesson in why data quality matters!
+	
+Doctor: As you can see the AI has the respective output of the data set it has been trained on.
+Doctor: You are completely responsible for the answers it gives after training since it knows only what it has been teached by you.
+Doctor: Remember to always think twice before believing the result of an AI model.
+
+Doctor: You can come back anytime you want to train a new Pet and see the results and new forms it can take depending on the final set.
 => END
